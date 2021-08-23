@@ -1,0 +1,27 @@
+# 公共配置
+
+# 1- tomcat
+server:
+  address: localhost
+  port: 9909
+  servlet:
+    #应用路径，配置应用路径，可方便进行反向代理
+    context-path:
+    #context-path: /cocoadmin
+
+# 2- 基础配置
+spring:
+  # 选择配置分支，先读取系统环境变量(类似JAVA_HOME之类的)，如果没有则默认值为 dev
+  profiles:
+    active: ${COCO_ADMIN:dev}
+
+  # application info
+  application:
+    name: coco-admin
+
+  # thymeleaf 访问根路径
+  thymeleaf:
+    prefix: classpath:/view/
+
+  # Spring Security 生效否 配置
+  #security.basic.enabled: false    #security.basic.enabled 配置已过时不可用
