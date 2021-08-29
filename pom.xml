@@ -69,13 +69,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!--
-            6-security安全校验(spring-boot-starter-security添加依赖后项目中所有资源都被保护起来了)
-        -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-security</artifactId>-->
-        <!--</dependency>-->
+        <!--6-security安全校验(spring-boot-starter-security添加依赖后项目中所有资源都被保护起来了)-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
         <!-- 7-thymeleaf模板 -->
         <dependency>

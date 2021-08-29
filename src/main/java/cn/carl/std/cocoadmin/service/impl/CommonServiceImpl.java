@@ -36,6 +36,8 @@ import java.util.Optional;
  * @Description: 通用service
  * @date 3/14/21 9:17 PM
  */
+//使用Spring的@Autowired注释时，IntelliJ IDEA显示错误，但该类运行没有任何问题
+//抑制"已声明bean，则IntelliJ无法解析"的警告
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Slf4j
 public class CommonServiceImpl<V, E, T> implements CommonService<V, E, T> {

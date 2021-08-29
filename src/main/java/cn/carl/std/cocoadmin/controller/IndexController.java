@@ -1,7 +1,11 @@
 package cn.carl.std.cocoadmin.controller;
 
+import cn.carl.std.cocoadmin.assist.SysSettingAssist;
+import cn.carl.std.cocoadmin.entity.vo.SysSettingVo;
+import cn.carl.std.cocoadmin.service.SysSettingService;
 import cn.carl.std.cocoadmin.util.ErrorUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
@@ -28,14 +32,24 @@ import java.net.UnknownHostException;
 @Controller
 public class IndexController {
 
+    // ModelAndView attributeName
+    private static final String SYS_KEY = "sys";
+    private static final String LOGIN_USER_KEY = "loginUser";
+    private static final String MENULIST_KEY = "menuList";
+    private static final String S_MENULIST_KEY = "shortcutMenuList";
+    private static final String RS_PUB_KEY = "publicKey";
+
     @Value(value = "${server.servlet.context-path}")
     private String contextPath;
     @Value(value = "${server.port}")
     private int port;
 
+    @Autowired
+    SysSettingService sysSettingService;
+
+
     /**
      * 启动成功后执行 加载系统设置
-     *
      *
      * @return
      */
@@ -44,9 +58,11 @@ public class IndexController {
 
         return applicationArguments -> {
             try {
-
+                //获取数据库中 系统设置信息 放入map中
+                SysSettingVo sysSettingVo = sysSettingService.get("1").getData();
+                SysSettingAssist.setSysSettingMap(sysSettingVo);
                 //获取本机内网IP
-                log.info("启动成功：" + "http://" + InetAddress.getLocalHost() + ":" + port + contextPath);
+                log.info("启动成功：" + "http://" + InetAddress.getLocalHost().getHostAddress() + ":" + port + contextPath);
             } catch (UnknownHostException e) {
                 log.error(ErrorUtil.errorInfoToString(e));
             }
@@ -65,21 +81,43 @@ public class IndexController {
             httpServletResponse.sendRedirect("/index");
         } catch (Exception e) {
             //ignore
+            log.error("首页加载失败:\n" + e.getMessage());
         }
     }
 
     /**
-     * @return
+     * todo 信息填充
+     *
+     * @return ModelAndView
      */
     @GetMapping("index")
     public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("index");
+        //系统信息
+        modelAndView.addObject(SYS_KEY, SysSettingAssist.getSysSetting());
+        //登录用户信息
+
+        //登录用户系统菜单信息
+
+        //登录用户快捷菜单信息
+
+        //后端公钥信息
+
         return modelAndView;
     }
 
-    @GetMapping("login")
+    /**
+     * todo 信息填充
+     *
+     * @return ModelAndView
+     */
+    @GetMapping("loginPage")
     public ModelAndView login() {
         ModelAndView modelAndView = new ModelAndView("login");
+        //系统信息
+        modelAndView.addObject(SYS_KEY, SysSettingAssist.getSysSetting());
+        //后端公钥信息
+
         return modelAndView;
     }
 
