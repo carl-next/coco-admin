@@ -120,5 +120,7 @@ ApplicationRunner是一个接口，我们需要实现它，并重写run()方法�
     4. 通过在使用springdata jpa时可以通过Example来快速的实现动态查询，同时配合Pageable可以实现快速的分页查询功能。
     5. 对于非字符串属性的只能精确匹配，比如想查询在某个时间段内注册的用户信息，就不能通过Example来查询\
     具体见[springdata jpa使用Example快速实现动态查询](https://blog.csdn.net/long476964/article/details/79677526)
-    
+- JPA EntityManager\
+EntityManager是JPA中用于增删改查的接口，它的作用相当于一座桥梁，连接内存中的java对象和数据库的数据存储。\
+[JPA EntityManager详解](https://www.jianshu.com/p/091360c47e6b) 
 - 
