@@ -1,5 +1,6 @@
 package cn.carl.std.cocoadmin.security;
 
+import cn.carl.std.cocoadmin.util.Md5Util;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +15,12 @@ import org.springframework.stereotype.Component;
 public class PasswordConfig implements PasswordEncoder {
     @Override
     public String encode(CharSequence charSequence) {
-        return null;
+        return Md5Util.getMD5(charSequence.toString());
     }
 
     @Override
     public boolean matches(CharSequence charSequence, String s) {
-        return false;
+        //s : password [charSequence是用户输入的密码，password是存库的密码]
+        return s.contentEquals(encode(charSequence));
     }
 }
