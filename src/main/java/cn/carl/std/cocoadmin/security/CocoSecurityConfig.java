@@ -1,4 +1,5 @@
 package cn.carl.std.cocoadmin.security;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity //开启WebSecurity模式
 public class CocoSecurityConfig extends WebSecurityConfigurerAdapter{
 
+    @Autowired
+    UserInfoAuth userInfoAuth;
+    @Autowired
+    PasswordConfig passwordConfig;
     /**
      * todo 认证
      * @param auth
@@ -31,7 +36,12 @@ public class CocoSecurityConfig extends WebSecurityConfigurerAdapter{
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        super.configure(auth);
+        //super.configure(auth);
+        auth
+                //用户认证处理
+                .userDetailsService(userInfoAuth)
+                //密码处理
+                .passwordEncoder(passwordConfig);
     }
 
     /**
