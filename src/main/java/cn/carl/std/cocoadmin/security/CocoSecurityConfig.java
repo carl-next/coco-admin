@@ -51,7 +51,13 @@ public class CocoSecurityConfig extends WebSecurityConfigurerAdapter{
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
+        //super.configure(http);
+        http
+                //关闭csrf防护
+                .csrf().disable()
+                .headers().frameOptions().disable()
+                .and();
+
     }
 
 }

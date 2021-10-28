@@ -123,4 +123,5 @@ ApplicationRunner是一个接口，我们需要实现它，并重写run()方法�
 - JPA EntityManager\
 EntityManager是JPA中用于增删改查的接口，它的作用相当于一座桥梁，连接内存中的java对象和数据库的数据存储。\
 [JPA EntityManager详解](https://www.jianshu.com/p/091360c47e6b) 
-- 
+- spring-boot-starter-security 工作原理\
+[spring-boot-starter-security 工作原理](https://blog.csdn.net/weixin_44865916/article/details/113358359) 

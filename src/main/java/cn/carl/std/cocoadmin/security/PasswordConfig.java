@@ -19,8 +19,8 @@ public class PasswordConfig implements PasswordEncoder {
     }
 
     @Override
-    public boolean matches(CharSequence charSequence, String s) {
-        //s : password [charSequence是用户输入的密码，password是存库的密码]
-        return s.contentEquals(encode(charSequence));
+    public boolean matches(CharSequence charSequence, String passWord) {
+        //password [charSequence是用户输入的密码，password是存库的密码]
+        return passWord.contentEquals(encode(charSequence));
     }
 }
